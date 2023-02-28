@@ -3,9 +3,13 @@
 }
 
 .testClass2 {
-  color: blueviolet;
+  color: orangered;
 }
 
 .testClass3 {
   color: red;
+}
+
+.test {
+  user-select: none;
 }
