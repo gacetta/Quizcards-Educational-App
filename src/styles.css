@@ -1,3 +1,5 @@
+@import 'styles/components/buttons.css';
+
 @import 'styles/test.css';
 
-@import 'styles/utilities/container.css'
+@import 'styles/utilities/container.css';

@@ -5,25 +5,67 @@ import { Header } from "./Header";
 import { Footer } from "./Footer";
 
 export const App = () => {
-  // setup state
+  // STATE
   const [currentCardset, setCurrentCardset] = useState({
     name: "national capitals",
-    id: 1,
+    cardset_id: 1,
   });
 
   const [cardArr, setCardArr] = useState([
     {
       card_id: 1,
       sideA: "united republic of tanzania",
-      sideB: "Dodoma",
+      sideB: "dodoma",
+    },
+    {
+      card_id: 2,
+      sideA: "france",
+      sideB: "paris",
+    },
+    {
+      card_id: 3,
+      sideA: "greenland",
+      sideB: "nuuk",
+    },
+    {
+      card_id: 4,
+      sideA: "greenland",
+      sideB: "nuuk",
     },
   ]);
 
   const [currentCard, setCurrentCard] = useState(cardArr[0]);
 
+  function getNewCard() {
+    if (cardArr.length === 1) return;
+    let newCard = currentCard;
+    // get new random card from cardArr (new card)
+    while (newCard === currentCard) {
+      const randomCardIndex = Math.floor(Math.random() * cardArr.length);
+      newCard = cardArr[randomCardIndex];
+    }
+    // set currentCard to that random card
+    setCurrentCard(newCard);
+  }
+
+  function handleCorrectGuess() {
+    // remove currentCard from cardArr
+    // newArr = cardArr.filter by card_id
+    const newArr = cardArr.filter((card) => {
+      return card.card_id !== currentCard.card_id;
+    });
+    // update cardArr
+    setCardArr(newArr);
+    return getNewCard();
+  }
+
+  function handleIncorrectGuess() {
+    return getNewCard();
+  }
+
   return (
     <Router>
-      <Header />
+      <Header currentCard={currentCard} currentCardset={currentCardset} />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route
@@ -32,11 +74,24 @@ export const App = () => {
             <QuizPage
               currentCard={currentCard}
               currentCardset={currentCardset}
+              handleIncorrectGuess={handleIncorrectGuess}
+              handleCorrectGuess={handleCorrectGuess}
             />
           }
         />
-        <Route path="/editcard" element={<EditCardPage />} />
-        <Route path="/editcardset" element={<EditCardsetPage />} />
+        <Route
+          path={`/editcard/:${currentCard.card_id}`}
+          element={
+            <EditCardPage
+              currentCard={currentCard}
+              currentCardset={currentCardset}
+            />
+          }
+        />
+        <Route
+          path={`/editcardset/:${currentCardset.cardset_id}`}
+          element={<EditCardsetPage currentCardset={currentCardset} />}
+        />
       </Routes>
       <Footer />
     </Router>

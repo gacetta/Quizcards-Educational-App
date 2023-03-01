@@ -9,7 +9,11 @@ export const QuizPage = (props) => {
         sideA={props.currentCard.sideA}
         sideB={props.currentCard.sideB}
       />
-      <FlashcardControls />
+      <FlashcardControls
+        handleIncorrectGuess={props.handleIncorrectGuess}
+        handleCorrectGuess={props.handleCorrectGuess}
+        currentCard={props.currentCard}
+      />
     </main>
   );
 };
