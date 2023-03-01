@@ -1,15 +1,103 @@
+/* GLOBAL RESET */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
 .testClass1 {
   color: forestgreen;
 }
 
 .testClass2 {
   color: orangered;
+  font-size: 22px;
+  border: 1px solid red;
+  animation: bounce 8s infinite ease-in-out;
 }
 
-.testClass3 {
-  color: red;
+@keyframes bounce {
+  0% {
+    transform: translateX(-30vw);
+  }
+
+  50% {
+    transform: translateX(30vw);
+  }
+
+  100% {
+    transform: translateX(-30vw);
+  }
 }
 
-.test {
+.main-container {
   user-select: none;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+  width: 80vw;
+  border: 1px solid green;
+  margin: auto;
+}
+
+.flex-container-col {
+  display: flex;
+  flex-direction: column;
+}
+
+/* FLASHCARD STYLING */
+.flashcard__container {
+  width: 500px;
+  height: 300px;
+  perspective: 1000px;
+  margin: ;
+}
+
+.flashcard {
+  position: relative;
+  width: 500px;
+  height: 300px;
+  transition: transform .8s;
+  transform-style: preserve-3d;
+}
+
+.flashcard__container:hover .flashcard {
+  transform: rotateY(180deg);
+}
+
+.sideA, .sideB {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.5rem;
+  backface-visibility: hidden;
+  border-radius: 5px;
+}
+
+.sideA {
+  background-color: #fca311;
+  color: #e5e5e5;
+  border: 5px solid #14213d;
+}
+
+.sideB {
+  background-color: #14213d;
+  color: #e5e5e5;
+  border: 5px solid #fca311;
+  transform: rotateY(180deg);
 }
