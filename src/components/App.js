@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Flashcard } from "./Flashcard";
-import { ButtonContainer, FlashcardControls } from "./FlashcardControls";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { HomePage, EditCardPage, EditCardsetPage, QuizPage } from "../pages";
+import { Header } from "./Header";
+import { Footer } from "./Footer";
 
 export const App = () => {
   // setup state
@@ -20,10 +22,23 @@ export const App = () => {
   const [currentCard, setCurrentCard] = useState(cardArr[0]);
 
   return (
-    <main id="app" className="main-container flex-container-col">
-      <h1 className="testClass1">{currentCardset.name}</h1>
-      <Flashcard sideA={currentCard.sideA} sideB={currentCard.sideB} />
-      <FlashcardControls />
-    </main>
+    <Router>
+      <Header />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route
+          path="/quiz"
+          element={
+            <QuizPage
+              currentCard={currentCard}
+              currentCardset={currentCardset}
+            />
+          }
+        />
+        <Route path="/editcard" element={<EditCardPage />} />
+        <Route path="/editcardset" element={<EditCardsetPage />} />
+      </Routes>
+      <Footer />
+    </Router>
   );
 };
