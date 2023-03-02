@@ -18,8 +18,11 @@ export const EditCardPage = (props) => {
         onChangeHandler={props.onChangeHandlerSideB}
       />
       <button onClick={props.onClickHandlerSaveCard}>
-        {props.card_id ? "update" : "create"}
+        {!props.card_id ? "update card" : "create card"}
       </button>
+      {props.card_id ? (
+        <button onClick={props.onClickHandlerDeleteCard}>delete card</button>
+      ) : null}
     </div>
   );
 };

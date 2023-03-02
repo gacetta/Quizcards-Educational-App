@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useNavigate,
+} from "react-router-dom";
 import { HomePage, EditCardPage, EditCardsetPage, QuizPage } from "../pages";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
@@ -152,14 +157,45 @@ export const App = () => {
         console.log("err: ", err);
       });
     } else {
-      // DB CREATE record
       console.log("creating card: ", newCard);
+      // DB CREATE record with POST request to '/cards'
+      fetch(`http://localhost:3000/cards/`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newCard),
+      }).catch((err) => {
+        console.log("err: ", err);
+      });
     }
+  }
+
+  function onClickHandlerDeleteCard() {
+    if (card_id) {
+      console.log("deleting card_id: ", card_id);
+
+      // DB Update record with PUT request to 'cards/card_id'
+      fetch(`http://localhost:3000/cards/${card_id}`, {
+        method: "DELETE",
+      }).catch((err) => {
+        console.log("err: ", err);
+      });
+    }
+  }
+
+  function clearCardData() {
+    console.log("clearing card data");
+    setSideA("");
+    setSideB("");
+    setCard_id(null);
   }
 
   return (
     <Router>
-      <Header card_id={card_id} cardset_id={cardset_id} />
+      <Header
+        card_id={card_id}
+        cardset_id={cardset_id}
+        clearCardData={clearCardData}
+      />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route
@@ -189,6 +225,7 @@ export const App = () => {
               onChangeHandlerSideA={onChangeHandlerSideA}
               onChangeHandlerSideB={onChangeHandlerSideB}
               onClickHandlerSaveCard={onClickHandlerSaveCard}
+              onClickHandlerDeleteCard={onClickHandlerDeleteCard}
             />
           }
         />
