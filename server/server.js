@@ -2,6 +2,7 @@ const path = require("path");
 const express = require("express");
 const userRouter = require("./routes/userRouter");
 const flashcardController = require("./controllers/flashcardController");
+const cors = require("cors");
 
 // setup app and port
 const app = express();
@@ -10,6 +11,9 @@ const PORT = process.env.PORT || 3000;
 // handle parsing request body
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// enable ALL CORS requests
+app.use(cors());
 
 // handle requests for static files (bundle.js)
 app.use("/build", express.static(path.resolve(__dirname, "../build")));
@@ -25,7 +29,7 @@ app.get(
   flashcardController.getCards,
   (req, res, next) => {
     console.log(`GET request to '/cards/:cardset_id'. `);
-    console.log("cards: ", res.locals.cards);
+    // console.log("cards: ", res.locals.cards);
     res.status(200).json(res.locals.cards);
   }
 );

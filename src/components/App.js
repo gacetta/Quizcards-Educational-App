@@ -33,15 +33,16 @@ export const App = () => {
       sideB: "madrid",
     },
   ]);
-
+  let cardArray;
   useEffect(() => {
-    document.title = `${cardsetName}`;
-    fetch(`http://localhost:3000/cards/${cardset_id}`, {
-      mode: "no-cors",
-    })
+    fetch(`http://localhost:3000/cards/${cardset_id}`)
       .then((res) => res.json())
       .then((data) => {
         console.log("fetched data: ", data);
+        cardArray = data;
+        setCardArr(cardArray);
+        console.log("cardArray: ", cardArray);
+        console.log("cardArr: ", cardArr);
       })
       .catch((err) => {
         console.log("fetch error: ", err);
@@ -73,12 +74,13 @@ export const App = () => {
       newCard_id = newCard.card_id;
     }
     // setCurrentCard(newCard);
-    setSideA(newCard.sideA);
-    setSideB(newCard.sideB);
+    setSideA(newCard.sidea);
+    setSideB(newCard.sideb);
     setCard_id(newCard.card_id);
   }
 
   function handleCorrectGuess() {
+    if (cardArr.length <= 1) return;
     // remove currentCard from cardArr
     const newArr = cardArr.filter((card) => {
       return card.card_id !== card_id;

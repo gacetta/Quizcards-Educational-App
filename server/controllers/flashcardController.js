@@ -35,7 +35,7 @@ flashcardController.getCards = (req, res, next) => {
   const querySelector = `
   SELECT * 
   FROM cards 
-  WHERE cardset_id='${1}'
+  WHERE cardset_id='${req.params.cardset_id}'
   `;
 
   // make a request to DB
