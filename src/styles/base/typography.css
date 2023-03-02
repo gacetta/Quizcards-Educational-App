@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Rock+Salt&family=Schoolbell&family=Shadows+Into+Light&display=swap');
+
 html {
   font-size: 62.5%;
 }
@@ -6,3 +8,17 @@ body {
   font-size: 1.6rem;
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.sideA, .sideB, .flashcard {
+  font-family: 'Nanum Pen Script', cursive;
+  letter-spacing: 3px;
+  font-size: 6rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  text-align: center;
+  /* font-family: 'Shadows Into Light', cursive; */
+}
+/* font-family: 'Nanum Pen Script', cursive;
+font-family: 'Rock Salt', cursive;
+font-family: 'Schoolbell', cursive;
+font-family: 'Shadows Into Light', cursive; */

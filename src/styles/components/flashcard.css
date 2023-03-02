@@ -25,20 +25,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 2.5rem;
   backface-visibility: hidden;
   border-radius: 5px;
 }
 
 .sideA {
-  background-color: #fca311;
-  color: #fff;
-  border: 5px solid #14213d;
+  background-color: var(--color-accent);
+  color: var(--color-white);
+  border: 5px solid var(--color-primary-dark);
 }
 
 .sideB {
-  background-color: #14213d;
-  color: #e5e5e5;
-  border: 5px solid #fca311;
+  background-color: var(--color-primary-dark);
+  color: var(--color-gray-light);
+  border: 5px solid var(--color-accent);
   transform: rotateY(180deg);
 }
