@@ -34,6 +34,20 @@ export const App = () => {
     },
   ]);
 
+  useEffect(() => {
+    document.title = `${cardsetName}`;
+    fetch(`http://localhost:3000/cards/${cardset_id}`, {
+      mode: "no-cors",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("fetched data: ", data);
+      })
+      .catch((err) => {
+        console.log("fetch error: ", err);
+      });
+  }, []);
+
   // initialize card with random card
   const {
     sideA: newSideA,

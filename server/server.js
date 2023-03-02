@@ -20,10 +20,15 @@ app.use("/user", (req, res, next) => {
   userRouter(req, res, next);
 });
 
-app.get("/:cardset_id", flashcardController.getCards, (req, res, next) => {
-  console.log(`GET request to '/:cardset_id'. `);
-  res.status(200).json(res.locals.cards);
-});
+app.get(
+  "/cards/:cardset_id",
+  flashcardController.getCards,
+  (req, res, next) => {
+    console.log(`GET request to '/cards/:cardset_id'. `);
+    console.log("cards: ", res.locals.cards);
+    res.status(200).json(res.locals.cards);
+  }
+);
 
 app.get("/", (req, res) => {
   console.log(`Get request for '/'.  sending index.html`);

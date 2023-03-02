@@ -49,6 +49,7 @@ module.exports = {
     port: 8080,
     proxy: {
       "/user": "http://localhost:3000",
+      "/cards": "http://localhost:3000",
     },
   },
 };
