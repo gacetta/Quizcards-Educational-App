@@ -67,7 +67,7 @@ body {
   transform-style: preserve-3d;
 }
 
-.flashcard__container:hover .flashcard {
+.flashcard__container.flip .flashcard {
   transform: rotateY(180deg);
 }
 

@@ -33,16 +33,15 @@ export const App = () => {
       sideB: "madrid",
     },
   ]);
-  let cardArray;
+
+  const [flipAllCards, setFlipAllCards] = useState(false);
+  const [flipped, setFlipped] = useState(false);
+
   useEffect(() => {
     fetch(`http://localhost:3000/cards/${cardset_id}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log("fetched data: ", data);
-        cardArray = data;
-        setCardArr(cardArray);
-        console.log("cardArray: ", cardArray);
-        console.log("cardArr: ", cardArr);
+        setCardArr(data);
       })
       .catch((err) => {
         console.log("fetch error: ", err);
@@ -64,16 +63,22 @@ export const App = () => {
   // HANDLERS         //
   //------------------//
   function getNewCard() {
+    // edge case for empty array
     if (cardArr.length <= 1) return;
+
+    // revert card to show preferred side
+    setFlipped(flipAllCards);
+
+    // get new random card from cardArr (new card)
     let newCard;
     let newCard_id = card_id;
-    // get new random card from cardArr (new card)
     while (newCard_id === card_id) {
       const randomCardIndex = Math.floor(Math.random() * cardArr.length);
       newCard = cardArr[randomCardIndex];
       newCard_id = newCard.card_id;
     }
-    // setCurrentCard(newCard);
+
+    // update state with new card
     setSideA(newCard.sidea);
     setSideB(newCard.sideb);
     setCard_id(newCard.card_id);
@@ -100,6 +105,11 @@ export const App = () => {
   function onChangeHandlerSideB(e) {
     setSideB(e.target.value);
     console.log(sideB);
+  }
+
+  function toggleFlip() {
+    console.log("toggleFlip");
+    setFlipped(!flipped);
   }
 
   function onClickHandlerSaveCard() {
@@ -131,6 +141,8 @@ export const App = () => {
               sideB={sideB}
               card_id={card_id}
               cardsetName={cardsetName}
+              toggleFlip={toggleFlip}
+              flipped={flipped}
               handleIncorrectGuess={handleIncorrectGuess}
               handleCorrectGuess={handleCorrectGuess}
             />
