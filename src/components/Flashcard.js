@@ -11,7 +11,6 @@ export const Flashcard = (props) => {
       <div className="flashcard">
         <div className="sideA">{props.sideA}</div>
         <div className="sideB">{props.sideB}</div>
-        <div>flipped: {props.flipped}</div>
       </div>
     </section>
   );

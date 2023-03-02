@@ -8,3 +8,20 @@ button {
   justify-content: center;
   align-items: center;
 }
+
+.flip-all {
+  width: 100%;
+  height: 100%;
+}
+
+.a-team {
+  background-color: #fca311;
+  color: #fff;
+  border: 2px solid #14213d;
+}
+
+.b-sides {
+  background-color: #14213d;
+  color: #e5e5e5;
+  border: 2px solid #fca311;
+}

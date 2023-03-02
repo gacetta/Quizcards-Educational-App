@@ -15,6 +15,8 @@ export const QuizPage = (props) => {
         handleIncorrectGuess={props.handleIncorrectGuess}
         handleCorrectGuess={props.handleCorrectGuess}
         cardID={props.card_id}
+        toggleFlipAllCards={props.toggleFlipAllCards}
+        flipAllCards={props.flipAllCards}
       />
     </main>
   );

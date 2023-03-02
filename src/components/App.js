@@ -8,10 +8,14 @@ export const App = () => {
   //------------------//
   // STATE            //
   //------------------//
+  // cardset info
   const [cardset_id, setCardset_id] = useState(1);
   const [cardsetName, setCardsetName] = useState("national capitals");
 
-  const [cardArr, setCardArr] = useState([
+  // array of cards
+  const [cardArr, setCardArr] = useState([]);
+
+  /**[
     {
       card_id: 1,
       sideA: "united republic of tanzania",
@@ -32,38 +36,41 @@ export const App = () => {
       sideA: "spain",
       sideB: "madrid",
     },
-  ]);
+  ] */
 
+  // flip cards state
   const [flipAllCards, setFlipAllCards] = useState(false);
   const [flipped, setFlipped] = useState(false);
+
+  // individual card state
+  const [sideA, setSideA] = useState("");
+  const [sideB, setSideB] = useState("");
+  const [card_id, setCard_id] = useState("");
 
   useEffect(() => {
     fetch(`http://localhost:3000/cards/${cardset_id}`)
       .then((res) => res.json())
       .then((data) => {
+        // load cards into state
         setCardArr(data);
+
+        // initialize card state with random card
+        const { sidea, sideb, card_id } =
+          data[Math.floor(Math.random() * data.length)];
+        setSideA(sidea);
+        setSideB(sideb);
+        setCard_id(card_id);
       })
       .catch((err) => {
         console.log("fetch error: ", err);
       });
   }, []);
 
-  // initialize card with random card
-  const {
-    sideA: newSideA,
-    sideB: newSideB,
-    card_id: newCard_id,
-  } = cardArr[Math.floor(Math.random() * cardArr.length)];
-
-  const [sideA, setSideA] = useState(newSideA);
-  const [sideB, setSideB] = useState(newSideB);
-  const [card_id, setCard_id] = useState(newCard_id);
-
   //------------------//
   // HANDLERS         //
   //------------------//
   function getNewCard() {
-    // edge case for empty array
+    // edge case for 1 or less cards
     if (cardArr.length <= 1) return;
 
     // revert card to show preferred side
@@ -85,8 +92,10 @@ export const App = () => {
   }
 
   function handleCorrectGuess() {
+    // edge case for array of 1 or less cards
     if (cardArr.length <= 1) return;
-    // remove currentCard from cardArr
+
+    // remove currentCard from cardArr and update state
     const newArr = cardArr.filter((card) => {
       return card.card_id !== card_id;
     });
@@ -100,16 +109,21 @@ export const App = () => {
 
   function onChangeHandlerSideA(e) {
     setSideA(e.target.value);
-    console.log(sideA);
   }
   function onChangeHandlerSideB(e) {
     setSideB(e.target.value);
-    console.log(sideB);
   }
 
   function toggleFlip() {
-    console.log("toggleFlip");
     setFlipped(!flipped);
+    console.log("toggleFlip: ", !flipped);
+  }
+
+  function toggleFlipAllCards() {
+    setFlipAllCards(!flipAllCards);
+    toggleFlip();
+    setFlipped(!flipAllCards);
+    console.log("toggleFlipAllCards: ", !flipAllCards);
   }
 
   function onClickHandlerSaveCard() {
@@ -143,8 +157,10 @@ export const App = () => {
               cardsetName={cardsetName}
               toggleFlip={toggleFlip}
               flipped={flipped}
+              flipAllCards={flipAllCards}
               handleIncorrectGuess={handleIncorrectGuess}
               handleCorrectGuess={handleCorrectGuess}
+              toggleFlipAllCards={toggleFlipAllCards}
             />
           }
         />
