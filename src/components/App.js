@@ -5,11 +5,11 @@ import { Header } from "./Header";
 import { Footer } from "./Footer";
 
 export const App = () => {
-  // STATE
-  const [currentCardset, setCurrentCardset] = useState({
-    name: "national capitals",
-    cardset_id: 1,
-  });
+  //------------------//
+  // STATE            //
+  //------------------//
+  const [cardset_id, setCardset_id] = useState(1);
+  const [cardsetName, setCardsetName] = useState("national capitals");
 
   const [cardArr, setCardArr] = useState([
     {
@@ -34,36 +34,41 @@ export const App = () => {
     },
   ]);
 
-  const [currentCard, setCurrentCard] = useState(
-    cardArr[Math.floor(Math.random() * cardArr.length)]
-  );
+  // initialize card with random card
+  const {
+    sideA: newSideA,
+    sideB: newSideB,
+    card_id: newCard_id,
+  } = cardArr[Math.floor(Math.random() * cardArr.length)];
 
-  const [sideA, setSideA] = useState(currentCard.sideA);
-  const [sideB, setSideB] = useState(currentCard.sideB);
-  const [cardID, setCardID] = useState(currentCard.card_id);
+  const [sideA, setSideA] = useState(newSideA);
+  const [sideB, setSideB] = useState(newSideB);
+  const [card_id, setCard_id] = useState(newCard_id);
 
+  //------------------//
+  // HANDLERS         //
+  //------------------//
   function getNewCard() {
     if (cardArr.length <= 1) return;
-    let newCard = currentCard;
+    let newCard;
+    let newCard_id = card_id;
     // get new random card from cardArr (new card)
-    while (newCard === currentCard) {
+    while (newCard_id === card_id) {
       const randomCardIndex = Math.floor(Math.random() * cardArr.length);
       newCard = cardArr[randomCardIndex];
+      newCard_id = newCard.card_id;
     }
-    // set currentCard to that random card
-    setCurrentCard(newCard);
+    // setCurrentCard(newCard);
     setSideA(newCard.sideA);
     setSideB(newCard.sideB);
-    setCardID(newCard.cardID);
+    setCard_id(newCard.card_id);
   }
 
   function handleCorrectGuess() {
     // remove currentCard from cardArr
-    // newArr = cardArr.filter by card_id
     const newArr = cardArr.filter((card) => {
-      return card.card_id !== currentCard.card_id;
+      return card.card_id !== card_id;
     });
-    // update cardArr
     setCardArr(newArr);
     return getNewCard();
   }
@@ -83,11 +88,11 @@ export const App = () => {
 
   function onClickHandlerSaveCard() {
     // create card object with sideA, sideB and cardID
-    const newCard = { sideA, sideB, cardID };
+    const newCard = { sideA, sideB, card_id };
     console.log("new card: ", newCard);
 
     // if cardID exists
-    if (cardID) {
+    if (card_id) {
       // DB Update record
       // remove matching cardID from cardARR
     }
@@ -99,7 +104,7 @@ export const App = () => {
 
   return (
     <Router>
-      <Header cardID={cardID} currentCardset={currentCardset} />
+      <Header card_id={card_id} cardset_id={cardset_id} />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route
@@ -108,32 +113,34 @@ export const App = () => {
             <QuizPage
               sideA={sideA}
               sideB={sideB}
-              cardID={cardID}
-              currentCard={currentCard}
-              currentCardset={currentCardset}
+              card_id={card_id}
+              cardsetName={cardsetName}
               handleIncorrectGuess={handleIncorrectGuess}
               handleCorrectGuess={handleCorrectGuess}
             />
           }
         />
         <Route
-          path={`/cards/:${cardID}`}
+          path={`/cards/:${card_id}`}
           element={
             <EditCardPage
               sideA={sideA}
               sideB={sideB}
-              cardID={cardID}
+              card_id={card_id}
               onChangeHandlerSideA={onChangeHandlerSideA}
               onChangeHandlerSideB={onChangeHandlerSideB}
               onClickHandlerSaveCard={onClickHandlerSaveCard}
-              currentCard={currentCard}
-              currentCardset={currentCardset}
             />
           }
         />
         <Route
-          path={`/cardsets/:${currentCardset.cardset_id}`}
-          element={<EditCardsetPage currentCardset={currentCardset} />}
+          path={`/cardsets/:${cardset_id}`}
+          element={
+            <EditCardsetPage
+              cardsetName={cardsetName}
+              cardset_id={cardset_id}
+            />
+          }
         />
       </Routes>
       <Footer />

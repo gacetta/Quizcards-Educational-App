@@ -6,10 +6,8 @@ export const Header = (props) => {
     <div className="header">
       <NavLink to="/">Home</NavLink>
       <NavLink to="/quiz">Quiz</NavLink>
-      <NavLink to={`/cards/:${props.cardID}`}>Edit Card</NavLink>
-      <NavLink to={`/cardsets/:${props.currentCardset.cardset_id}`}>
-        Edit Cardset
-      </NavLink>
+      <NavLink to={`/cards/:${props.card_id}`}>Edit Card</NavLink>
+      <NavLink to={`/cardsets/:${props.cardset_id}`}>Edit Cardset</NavLink>
     </div>
   );
 };
