@@ -1,6 +1,11 @@
+@import 'styles/base/typography.css';
+
 @import 'styles/components/buttons.css';
+@import 'styles/components/flashcard.css';
+@import 'styles/components/header.css';
 @import 'styles/components/links.css';
 
 @import 'styles/test.css';
 
 @import 'styles/utilities/container.css';
+@import 'styles/utilities/effects.css';

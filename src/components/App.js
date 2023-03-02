@@ -20,29 +20,6 @@ export const App = () => {
   // array of cards
   const [cardArr, setCardArr] = useState([]);
 
-  /**[
-    {
-      card_id: 1,
-      sideA: "united republic of tanzania",
-      sideB: "dodoma",
-    },
-    {
-      card_id: 2,
-      sideA: "france",
-      sideB: "paris",
-    },
-    {
-      card_id: 3,
-      sideA: "greenland",
-      sideB: "nuuk",
-    },
-    {
-      card_id: 4,
-      sideA: "spain",
-      sideB: "madrid",
-    },
-  ] */
-
   // flip cards state
   const [flipAllCards, setFlipAllCards] = useState(false);
   const [flipped, setFlipped] = useState(false);
@@ -51,6 +28,7 @@ export const App = () => {
   const [sideA, setSideA] = useState("");
   const [sideB, setSideB] = useState("");
   const [card_id, setCard_id] = useState("");
+  const [creatingNewCard, setCreatingNewCard] = useState(false);
 
   //------------------//
   // INITIALIZE CARDS //
@@ -87,9 +65,6 @@ export const App = () => {
     // edge case for 1 or less cards
     if (cardArr.length <= 1) return;
 
-    // revert card to show preferred side
-    setFlipped(flipAllCards);
-
     // get new random card from cardArr (new card)
     let newCard;
     let newCard_id = card_id;
@@ -118,7 +93,10 @@ export const App = () => {
   }
 
   function handleIncorrectGuess() {
-    return getNewCard();
+    // revert card to show preferred side
+    if (flipped !== flipAllCards) setTimeout(getNewCard, 250);
+    else getNewCard();
+    setFlipped(flipAllCards);
   }
 
   function onChangeHandlerSideA(e) {
@@ -126,6 +104,10 @@ export const App = () => {
   }
   function onChangeHandlerSideB(e) {
     setSideB(e.target.value);
+  }
+
+  function toggleCreatingNewCard() {
+    setCreatingNewCard(!creatingNewCard);
   }
 
   function toggleFlip() {
@@ -143,9 +125,11 @@ export const App = () => {
   function onClickHandlerSaveCard() {
     // create card object with sideA, sideB and cardID
     const newCard = { sidea: sideA, sideb: sideB, cardset_id };
+    const updating = card_id ? true : false;
+    const alertMsg = `Card ${updating ? "updated" : "created"} successfully`;
 
-    // if cardID exists
-    if (card_id) {
+    // UPDATE CARD (card_id exists)
+    if (updating) {
       console.log("updating card: ", newCard);
 
       // DB Update record with PUT request to 'cards/card_id'
@@ -156,8 +140,15 @@ export const App = () => {
       }).catch((err) => {
         console.log("err: ", err);
       });
-    } else {
+
+      // confirm update
+      alert(alertMsg);
+    }
+
+    // CREATE NEW CARD (card_id is null)
+    else {
       console.log("creating card: ", newCard);
+
       // DB CREATE record with POST request to '/cards'
       fetch(`http://localhost:3000/cards/`, {
         method: "POST",
@@ -166,6 +157,9 @@ export const App = () => {
       }).catch((err) => {
         console.log("err: ", err);
       });
+
+      // confirm creation
+      alert(alertMsg);
     }
   }
 
@@ -179,6 +173,9 @@ export const App = () => {
       }).catch((err) => {
         console.log("err: ", err);
       });
+
+      alert("Card deleted successfully");
+      clearCardData();
     }
   }
 
@@ -191,11 +188,7 @@ export const App = () => {
 
   return (
     <Router>
-      <Header
-        card_id={card_id}
-        cardset_id={cardset_id}
-        clearCardData={clearCardData}
-      />
+      <Header cardsetName={cardsetName} cardset_id={cardset_id} />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route
@@ -216,7 +209,24 @@ export const App = () => {
           }
         />
         <Route
-          path={`/cards/:${card_id}`}
+          path={`/cards/${card_id}`}
+          element={
+            <EditCardPage
+              sideA={sideA}
+              sideB={sideB}
+              card_id={card_id}
+              creatingNewCard={creatingNewCard}
+              onChangeHandlerSideA={onChangeHandlerSideA}
+              onChangeHandlerSideB={onChangeHandlerSideB}
+              onClickHandlerSaveCard={onClickHandlerSaveCard}
+              onClickHandlerDeleteCard={onClickHandlerDeleteCard}
+              clearCardData={clearCardData}
+              toggleCreatingNewCard={toggleCreatingNewCard}
+            />
+          }
+        />
+        <Route
+          path={`/cards`}
           element={
             <EditCardPage
               sideA={sideA}
@@ -226,11 +236,12 @@ export const App = () => {
               onChangeHandlerSideB={onChangeHandlerSideB}
               onClickHandlerSaveCard={onClickHandlerSaveCard}
               onClickHandlerDeleteCard={onClickHandlerDeleteCard}
+              clearCardData={clearCardData}
             />
           }
         />
         <Route
-          path={`/cardsets/:${cardset_id}`}
+          path={`/cardsets/${cardset_id}`}
           element={
             <EditCardsetPage
               cardsetName={cardsetName}

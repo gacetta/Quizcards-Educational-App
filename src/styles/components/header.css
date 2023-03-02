@@ -1,0 +1,30 @@
+.header {
+  width: 100vw;
+  display: flex;
+  align-items: center;
+}
+
+.navElement {
+  padding: 2rem;
+  text-decoration: none;
+
+}
+
+.navHome {
+  width: 35vw;
+}
+
+.navCardsetName {
+  text-transform: uppercase;
+  justify-self: center;
+  flex-grow: 1;
+  font-size: 3rem;
+}
+
+.navQuiz {
+
+}
+
+.navEditCardset {
+
+}
