@@ -1,0 +1,26 @@
+.textAreaInput {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-justify: ;
+
+  & textarea {
+    resize: none;
+    padding-top: 25%;
+    text-align: center;
+    height: 150px;
+    width: 250px;
+  }
+
+  & #sideA {
+    background-color: var(--color-accent);
+    color: var(--color-white);
+    border: 5px solid var(--color-primary-dark);
+  }
+
+  & #sideB {
+    background-color: var(--color-primary-dark);
+    color: var(--color-gray-light);
+    border: 5px solid var(--color-accent);
+  }
+}

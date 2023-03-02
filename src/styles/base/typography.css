@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Rock+Salt&family=Schoolbell&family=Shadows+Into+Light&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Antic+Slab&family=Carter+One&family=Noto+Sans+Bassa+Vah:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;1,200;1,300&family=Carter+One&display=swap');
 
 html {
   font-size: 62.5%;
@@ -7,8 +8,9 @@ html {
 
 body {
   font-size: 1.6rem;
-  /* font-family: 'Antic Slab', serif; */
-  font-family: 'Carter One', cursive;
+  font-family: 'Antic Slab', serif;
+  /* font-family: 'Carter One', cursive; */
+  /* font-family: 'Barlow Condensed', sans-serif; */
   /* font-family: 'Noto Sans Bassa Vah', sans-serif; */
 }
 
@@ -21,4 +23,10 @@ body {
   text-align: center;
   /* font-family: 'Shadows Into Light', cursive; */
 }
+
+.heavyText {
+  font-family: 'Carter One', cursive;
+}
+
+
 

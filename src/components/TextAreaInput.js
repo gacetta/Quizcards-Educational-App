@@ -2,7 +2,7 @@ import React from "react";
 
 export const TextAreaInput = (props) => {
   return (
-    <div className="textareainput">
+    <div className="textAreaInput">
       <label htmlFor={props.labelID}>{props.text}:</label>
       <textarea
         type="textarea"

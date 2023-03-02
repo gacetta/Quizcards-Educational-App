@@ -6,7 +6,7 @@ import { TextAreaInput } from "../components";
 export const EditCardPage = (props) => {
   const navigate = useNavigate();
   return (
-    <div className="editCard">
+    <div className="editCard flex-container-col">
       <h1>Edit Card</h1>
       <TextAreaInput
         labelID="sideA"
@@ -20,30 +20,34 @@ export const EditCardPage = (props) => {
         value={props.sideB}
         onChangeHandler={props.onChangeHandlerSideB}
       />
-      <button onClick={props.onClickHandlerSaveCard}>
-        {props.card_id ? "update card" : "create card"}
-      </button>
-      {props.card_id ? (
-        <button
-          onClick={() => {
-            props.onClickHandlerDeleteCard();
+      <div className="inputContainter">
+        <input
+          type="checkbox"
+          id="createNew"
+          name="createNew"
+          checked={props.card_id === null}
+          onChange={() => {
+            props.clearCardData();
             navigate(`/cards`);
           }}
-        >
-          delete card
+        ></input>
+        <label htmlFor="createNew">New Card</label>
+      </div>
+      <div className="flex-container-row">
+        <button onClick={props.onClickHandlerSaveCard}>
+          {props.card_id ? "update card" : "create card"}
         </button>
-      ) : null}
-      <input
-        type="checkbox"
-        id="createNew"
-        name="createNew"
-        checked={props.card_id === null}
-        onChange={() => {
-          props.clearCardData();
-          navigate(`/cards`);
-        }}
-      ></input>
-      <label htmlFor="createNew">New Card</label>
+        {props.card_id ? (
+          <button
+            onClick={() => {
+              props.onClickHandlerDeleteCard();
+              navigate(`/cards`);
+            }}
+          >
+            delete card
+          </button>
+        ) : null}
+      </div>
     </div>
   );
 };

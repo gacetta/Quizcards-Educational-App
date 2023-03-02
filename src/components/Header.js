@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 
 export const Header = (props) => {
   return (
-    <div className="header">
+    <div className="header heavyText">
       <NavLink className="navElement navHome" to="/">
         Home
       </NavLink>

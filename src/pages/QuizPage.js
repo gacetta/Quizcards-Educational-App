@@ -4,7 +4,7 @@ import { Flashcard, FlashcardControls } from "../components";
 export const QuizPage = (props) => {
   return (
     <main id="app" className="main-container flex-container-col">
-      <h1 className="cardsetName">{props.cardsetName}</h1>
+      <h1 className="cardsetName heavyText">{props.cardsetName}</h1>
       <Flashcard
         sideA={props.sideA}
         sideB={props.sideB}

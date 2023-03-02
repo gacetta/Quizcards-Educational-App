@@ -2,6 +2,9 @@
   display: flex;
   flex-direction: column;
 }
+.flex-container-row {
+  display: flex;
+}
 
 .main-container {
   user-select: none;
