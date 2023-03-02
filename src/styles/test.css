@@ -48,7 +48,6 @@ body {
   justify-content: center;
   height: 80vh;
   width: 80vw;
-  border: 1px solid green;
   margin: auto;
 }
 
@@ -86,7 +85,7 @@ body {
 
 .sideA {
   background-color: #fca311;
-  color: #e5e5e5;
+  color: #fff;
   border: 5px solid #14213d;
 }
 

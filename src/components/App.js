@@ -29,15 +29,21 @@ export const App = () => {
     },
     {
       card_id: 4,
-      sideA: "greenland",
-      sideB: "nuuk",
+      sideA: "spain",
+      sideB: "madrid",
     },
   ]);
 
-  const [currentCard, setCurrentCard] = useState(cardArr[0]);
+  const [currentCard, setCurrentCard] = useState(
+    cardArr[Math.floor(Math.random() * cardArr.length)]
+  );
+
+  const [sideA, setSideA] = useState(currentCard.sideA);
+  const [sideB, setSideB] = useState(currentCard.sideB);
+  const [cardID, setCardID] = useState(currentCard.card_id);
 
   function getNewCard() {
-    if (cardArr.length === 1) return;
+    if (cardArr.length <= 1) return;
     let newCard = currentCard;
     // get new random card from cardArr (new card)
     while (newCard === currentCard) {
@@ -46,6 +52,9 @@ export const App = () => {
     }
     // set currentCard to that random card
     setCurrentCard(newCard);
+    setSideA(newCard.sideA);
+    setSideB(newCard.sideB);
+    setCardID(newCard.cardID);
   }
 
   function handleCorrectGuess() {
@@ -63,15 +72,43 @@ export const App = () => {
     return getNewCard();
   }
 
+  function onChangeHandlerSideA(e) {
+    setSideA(e.target.value);
+    console.log(sideA);
+  }
+  function onChangeHandlerSideB(e) {
+    setSideB(e.target.value);
+    console.log(sideB);
+  }
+
+  function onClickHandlerSaveCard() {
+    // create card object with sideA, sideB and cardID
+    const newCard = { sideA, sideB, cardID };
+    console.log("new card: ", newCard);
+
+    // if cardID exists
+    if (cardID) {
+      // DB Update record
+      // remove matching cardID from cardARR
+    }
+    // else   ******HOW DO WE DO THIS?*****
+    else {
+      // DB CREATE record
+    }
+  }
+
   return (
     <Router>
-      <Header currentCard={currentCard} currentCardset={currentCardset} />
+      <Header cardID={cardID} currentCardset={currentCardset} />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route
           path="/quiz"
           element={
             <QuizPage
+              sideA={sideA}
+              sideB={sideB}
+              cardID={cardID}
               currentCard={currentCard}
               currentCardset={currentCardset}
               handleIncorrectGuess={handleIncorrectGuess}
@@ -80,16 +117,22 @@ export const App = () => {
           }
         />
         <Route
-          path={`/editcard/:${currentCard.card_id}`}
+          path={`/cards/:${cardID}`}
           element={
             <EditCardPage
+              sideA={sideA}
+              sideB={sideB}
+              cardID={cardID}
+              onChangeHandlerSideA={onChangeHandlerSideA}
+              onChangeHandlerSideB={onChangeHandlerSideB}
+              onClickHandlerSaveCard={onClickHandlerSaveCard}
               currentCard={currentCard}
               currentCardset={currentCardset}
             />
           }
         />
         <Route
-          path={`/editcardset/:${currentCardset.cardset_id}`}
+          path={`/cardsets/:${currentCardset.cardset_id}`}
           element={<EditCardsetPage currentCardset={currentCardset} />}
         />
       </Routes>

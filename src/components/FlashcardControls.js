@@ -6,7 +6,7 @@ export const FlashcardControls = (props) => {
     <section>
       <button onClick={props.handleIncorrectGuess}>X</button>
       <button onClick={props.handleCorrectGuess}>✓</button>
-      <Link to={`/editcard/:${props.currentCard.card_id}`}>Edit Card</Link>
+      <Link to={`/cards/:${props.cardID}`}>Edit Card</Link>
     </section>
   );
 };

@@ -1,13 +1,23 @@
 import React from "react";
+import { TextAreaInput } from "../components";
 
 export const EditCardPage = (props) => {
   return (
     <div className="editCard">
       <h1>Edit Card</h1>
-      <label for="sideA">Side A:</label>
-      <textarea type="textarea" id="sideA" name="sideA"></textarea>
-      <label for="sideB">Side B:</label>
-      <textarea type="textarea" id="sideB" name="sideB"></textarea>
+      <TextAreaInput
+        labelID="sideA"
+        text="Side A"
+        value={props.sideA}
+        onChangeHandler={props.onChangeHandlerSideA}
+      />
+      <TextAreaInput
+        labelID="sideB"
+        text="Side B"
+        value={props.sideB}
+        onChangeHandler={props.onChangeHandlerSideB}
+      />
+      <button onClick={props.onClickHandlerSaveCard}>Save Changes</button>
     </div>
   );
 };
