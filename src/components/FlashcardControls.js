@@ -14,7 +14,7 @@ export const FlashcardControls = (props) => {
         <button onClick={props.handleIncorrectGuess}>X</button>
         <button onClick={props.handleCorrectGuess}>✓</button>
       </div>
-      <Link className="edit-link" to={`/cards/:${props.card_id}`}>
+      <Link className="edit-link" to={`/cards/${props.card_id}`}>
         Edit Card
       </Link>
     </section>

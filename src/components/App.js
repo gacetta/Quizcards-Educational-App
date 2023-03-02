@@ -48,18 +48,24 @@ export const App = () => {
   const [card_id, setCard_id] = useState("");
 
   useEffect(() => {
-    fetch(`http://localhost:3000/cards/${cardset_id}`)
+    fetch(`http://localhost:3000/cardsets/${cardset_id}`)
       .then((res) => res.json())
       .then((data) => {
         // load cards into state
         setCardArr(data);
 
         // initialize card state with random card
-        const { sidea, sideb, card_id } =
-          data[Math.floor(Math.random() * data.length)];
+        const {
+          sidea,
+          sideb,
+          card_id: cardID,
+        } = data[Math.floor(Math.random() * data.length)];
+
+        console.log("card_id: ", cardID);
+
         setSideA(sidea);
         setSideB(sideb);
-        setCard_id(card_id);
+        setCard_id(cardID);
       })
       .catch((err) => {
         console.log("fetch error: ", err);
@@ -128,17 +134,18 @@ export const App = () => {
 
   function onClickHandlerSaveCard() {
     // create card object with sideA, sideB and cardID
-    const newCard = { sideA, sideB, card_id };
-    console.log("new card: ", newCard);
+    const newCard = { sideA, sideB, card_id, cardset_id };
 
     // if cardID exists
     if (card_id) {
+      console.log("updating card: ", newCard);
       // DB Update record
       // remove matching cardID from cardARR
     }
     // else   ******HOW DO WE DO THIS?*****
     else {
       // DB CREATE record
+      console.log("creating card: ", newCard);
     }
   }
 

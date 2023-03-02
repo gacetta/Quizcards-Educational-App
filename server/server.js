@@ -1,6 +1,7 @@
 const path = require("path");
 const express = require("express");
 const userRouter = require("./routes/userRouter");
+const cardsRouter = require("./routes/cardsRouter");
 const flashcardController = require("./controllers/flashcardController");
 const cors = require("cors");
 
@@ -24,8 +25,13 @@ app.use("/user", (req, res, next) => {
   userRouter(req, res, next);
 });
 
+app.use("/cards", (req, res, next) => {
+  console.log(`Request to '/cards' in server.js routed to cardsRouter.js`);
+  cardsRouter(req, res, next);
+});
+
 app.get(
-  "/cards/:cardset_id",
+  "/cardsets/:cardset_id",
   flashcardController.getCards,
   (req, res, next) => {
     console.log(`GET request to '/cards/:cardset_id'. `);

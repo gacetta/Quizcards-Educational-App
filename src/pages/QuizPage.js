@@ -14,7 +14,7 @@ export const QuizPage = (props) => {
       <FlashcardControls
         handleIncorrectGuess={props.handleIncorrectGuess}
         handleCorrectGuess={props.handleCorrectGuess}
-        cardID={props.card_id}
+        card_id={props.card_id}
         toggleFlipAllCards={props.toggleFlipAllCards}
         flipAllCards={props.flipAllCards}
       />
