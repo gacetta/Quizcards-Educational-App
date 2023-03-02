@@ -8,6 +8,7 @@ router.put("/:card_id", flashcardController.updateCard, (req, res) => {
   console.log(
     `cardsRouter.js completing PUT request to '/cards/:card_id'. req.params: ${req.params.card_id}`
   );
+  console.log("req.body: ", req.body);
   res.sendStatus(200);
 });
 

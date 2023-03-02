@@ -47,6 +47,9 @@ export const App = () => {
   const [sideB, setSideB] = useState("");
   const [card_id, setCard_id] = useState("");
 
+  //------------------//
+  // INITIALIZE CARDS //
+  //------------------//
   useEffect(() => {
     fetch(`http://localhost:3000/cardsets/${cardset_id}`)
       .then((res) => res.json())
@@ -134,16 +137,21 @@ export const App = () => {
 
   function onClickHandlerSaveCard() {
     // create card object with sideA, sideB and cardID
-    const newCard = { sideA, sideB, card_id, cardset_id };
+    const newCard = { sidea: sideA, sideb: sideB, cardset_id };
 
     // if cardID exists
     if (card_id) {
       console.log("updating card: ", newCard);
-      // DB Update record
-      // remove matching cardID from cardARR
-    }
-    // else   ******HOW DO WE DO THIS?*****
-    else {
+
+      // DB Update record with PUT request to 'cards/card_id'
+      fetch(`http://localhost:3000/cards/${card_id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newCard),
+      }).catch((err) => {
+        console.log("err: ", err);
+      });
+    } else {
       // DB CREATE record
       console.log("creating card: ", newCard);
     }
