@@ -14,12 +14,15 @@
 .navElement {
   text-decoration: none;
   width: 30rem;
-  /* border: 1px solid red; */
   color: var(--color-gray-light);
 }
 
 .navHome {
   justify-self: flex-start;
+}
+
+.navHome, .navQuiz, .navEditCardset {
+  letter-spacing: 1.2px;
 }
 
 .navTitle {
@@ -32,9 +35,9 @@
 
 .navQuiz, .navEditCardset {
   text-align: right;
+  height: 100%;
 }
 
 .navLinkContainer {
   display: flex;
-  justify-content: flex-end;
 }
