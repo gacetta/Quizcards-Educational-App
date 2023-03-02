@@ -10,9 +10,13 @@ export const FlashcardControls = (props) => {
       >
         {!props.flipAllCards ? "B-Sides" : "The A-Team"}
       </button>
-      <div>
-        <button onClick={props.handleIncorrectGuess}>X</button>
-        <button onClick={props.handleCorrectGuess}>✓</button>
+      <div className="buttonContainer">
+        <button onClick={props.handleIncorrectGuess} className="incorrectGuess">
+          X
+        </button>
+        <button onClick={props.handleCorrectGuess} className="correctGuess">
+          ✓
+        </button>
       </div>
       <Link className="edit-link" to={`/cards/${props.card_id}`}>
         Edit Card

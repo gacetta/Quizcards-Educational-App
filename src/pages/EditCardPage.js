@@ -7,7 +7,7 @@ export const EditCardPage = (props) => {
   const navigate = useNavigate();
   return (
     <div className="editCard flex-container-col">
-      <h1>Edit Card</h1>
+      <h1 className="heavyText">Edit Card</h1>
       <TextAreaInput
         labelID="sideA"
         text="Side A"

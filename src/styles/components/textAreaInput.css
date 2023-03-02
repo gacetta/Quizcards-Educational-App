@@ -2,14 +2,22 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  text-justify: ;
+  margin-bottom: 2rem;
 
   & textarea {
     resize: none;
-    padding-top: 25%;
+    padding-top: 22%;
     text-align: center;
     height: 150px;
     width: 250px;
+    font-family: 'Nanum Pen Script', cursive;
+    letter-spacing: 1.5px;
+    line-height: .8;
+    font-size: 3rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-align: center;
+    outline: none;
   }
 
   & #sideA {

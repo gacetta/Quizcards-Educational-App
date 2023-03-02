@@ -9,7 +9,7 @@
 .main-container {
   user-select: none;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   height: 80vh;
   width: 80vw;
   margin: auto;
