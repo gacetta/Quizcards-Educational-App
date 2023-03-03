@@ -12,19 +12,40 @@ import { TextAreaInput, CardlistCard } from "../components";
 */
 
 export const EditCardsetPage = (props) => {
+  console.log(props.cardArr);
+
   return (
     <div className="editCardset main-container flex-container-col">
       <h1 className="heavyText">Edit Cardset</h1>
       <TextAreaInput
         labelID={"cardsetName"}
-        text={"Cardset Name:"}
+        text={"Cardset Name"}
         value={props.cardsetName}
         onChangeHandler={props.onChangeHandlerCardsetName}
       />
-      <h3>Card list:</h3>
-      <ul>
-        <CardlistCard />
-      </ul>
+      <section className="cardlist-container flex-container-col">
+        <h3 className="heavyText">Card list:</h3>
+        <ul>
+          <li className="flex-container-row">
+            <p className="cardlistSideA cardlistSide-container cardlistHeader">
+              Side A
+            </p>
+            <p className="cardlistSideB cardlistSide-container cardlistHeader">
+              Side B
+            </p>
+          </li>
+          {props.cardArr.map((card) => {
+            return (
+              <CardlistCard
+                key={card.card_id}
+                sideA={card.sidea}
+                sideB={card.sideb}
+                card_id={card.card_id}
+              />
+            );
+          })}
+        </ul>
+      </section>
     </div>
   );
 };

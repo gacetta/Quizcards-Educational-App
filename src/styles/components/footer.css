@@ -1,7 +1,7 @@
 .footer {
     width: 100vw;
     height: 1rem;
-    position: absolute;
+    position: fixed;
     bottom: 0;
 
     display: flex;

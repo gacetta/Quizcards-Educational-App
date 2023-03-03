@@ -1,0 +1,35 @@
+.cardlist-container {
+  width: 75%;
+}
+
+.cardlistSide-container {
+  height: 100%;
+  width: 40%;
+  /* border: 1px solid red; */
+  background-color: var(--color-gray-light);
+  
+}
+
+.cardlistHeader {
+  background: transparent;
+  border: none;
+  text-transform: uppercase;
+}
+
+.cardlistLink-container {
+  
+}
+
+.cardlist-card {
+  height: 5rem;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.cardlistSideA {
+  
+}
+
+.cardlistSideB {
+  margin: 0 2rem;
+}

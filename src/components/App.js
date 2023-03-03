@@ -256,6 +256,7 @@ export const App = () => {
             <EditCardsetPage
               cardsetName={cardsetName}
               cardset_id={cardset_id}
+              cardArr={cardArr}
               sideA={sideA}
               sideB={sideB}
               card_id={card_id}
