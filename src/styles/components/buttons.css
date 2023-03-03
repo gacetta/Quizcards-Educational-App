@@ -46,3 +46,8 @@ button {
   font-size: 4rem;
   font-family: 'Nanum Pen Script', cursive;
 }
+
+.loginButton {
+  width: 100%;
+  height: 2rem;
+}

@@ -89,11 +89,17 @@ export const App = () => {
       return card.card_id !== card_id;
     });
     setCardArr(newArr);
-    return getNewCard();
+
+    // revert card to show preferred side
+    // setTimeout to wait until card is flipped to get new card
+    if (flipped !== flipAllCards) setTimeout(getNewCard, 250);
+    else getNewCard();
+    setFlipped(flipAllCards);
   }
 
   function handleIncorrectGuess() {
     // revert card to show preferred side
+    // setTimeout to wait until card is flipped to get new card
     if (flipped !== flipAllCards) setTimeout(getNewCard, 250);
     else getNewCard();
     setFlipped(flipAllCards);
@@ -250,6 +256,9 @@ export const App = () => {
             <EditCardsetPage
               cardsetName={cardsetName}
               cardset_id={cardset_id}
+              sideA={sideA}
+              sideB={sideB}
+              card_id={card_id}
               onChangeHandlerCardsetName={onChangeHandlerCardsetName}
             />
           }
