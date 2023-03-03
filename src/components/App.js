@@ -106,6 +106,10 @@ export const App = () => {
     setSideB(e.target.value);
   }
 
+  function onChangeHandlerCardsetName(e) {
+    setCardsetName(e.target.value);
+  }
+
   function toggleCreatingNewCard() {
     setCreatingNewCard(!creatingNewCard);
   }
@@ -246,6 +250,7 @@ export const App = () => {
             <EditCardsetPage
               cardsetName={cardsetName}
               cardset_id={cardset_id}
+              onChangeHandlerCardsetName={onChangeHandlerCardsetName}
             />
           }
         />

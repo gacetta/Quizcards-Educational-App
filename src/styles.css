@@ -12,6 +12,7 @@
 @import 'styles/components/links.css';
 
 @import 'styles/layouts/editCardPage.css';
+@import 'styles/layouts/editCardsetPage.css';
 @import 'styles/layouts/quizpage.css';
 
 @import 'styles/utilities/container.css';
