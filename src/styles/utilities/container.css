@@ -10,7 +10,7 @@
   user-select: none;
   align-items: center;
   justify-content: flex-start;
-  height: 80vh;
   width: 80vw;
   margin: auto;
+  margin-bottom: 4rem;
 }

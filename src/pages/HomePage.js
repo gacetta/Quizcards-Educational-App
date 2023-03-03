@@ -16,9 +16,16 @@ export const HomePage = (props) => {
         </label>
         <button className="loginButton">sign in</button>
       </section>
-      <section>
-        <h3>Select your cardset feature</h3>
-        <button className="cardsetButton"></button>
+      <section className="cardsets-container">
+        <h3>Amazing Select your cardset feature</h3>
+        <button className="cardsetButton">Cardset</button>
+        <button className="cardsetButton">Cardset</button>
+        <button className="cardsetButton">Cardset</button>
+        <button className="cardsetButton">Cardset</button>
+        <button className="cardsetButton">Cardset</button>
+        <button className="cardsetButton">Cardset</button>
+        <button className="cardsetButton">Cardset</button>
+        <button className="cardsetButton">Cardset</button>
       </section>
     </div>
   );

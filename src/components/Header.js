@@ -12,7 +12,7 @@ export const Header = (props) => {
       <h1 className="navElement navTitle">Flashcards</h1>
       <div className="navElement navLinkContainer">
         <NavLink className="navElement navQuiz" to="/quiz">
-          Quiz
+          Play
         </NavLink>
         <NavLink
           className="navElement navEditCardset"
