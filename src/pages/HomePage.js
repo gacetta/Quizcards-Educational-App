@@ -17,7 +17,9 @@ export const HomePage = (props) => {
         <button className="loginButton">sign in</button>
       </section>
       <section className="cardsets-container">
-        <h3>Amazing Select your cardset feature</h3>
+        <h3 className="homeHeader">
+          Incredibly Amazing Cardset Selection Feature
+        </h3>
         <button className="cardsetButton">Cardset</button>
         <button className="cardsetButton">Cardset</button>
         <button className="cardsetButton">Cardset</button>
