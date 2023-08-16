@@ -39,6 +39,7 @@ export const App = () => {
       .then((data) => {
         // load cards into state
         setCardArr(data);
+        console.log("current cards:", data);
 
         // initialize card state with random card
         const {
@@ -63,7 +64,9 @@ export const App = () => {
   //------------------//
   function getNewCard() {
     // edge case for 1 or less cards
-    if (cardArr.length <= 1) return;
+    if ((cardArr.length <= 1) & card_id) return;
+
+    console.log("getNewCard");
 
     // get new random card from cardArr (new card)
     let newCard;
@@ -78,9 +81,19 @@ export const App = () => {
     setSideA(newCard.sidea);
     setSideB(newCard.sideb);
     setCard_id(newCard.card_id);
+
+    console.log("getNewCard current cards:", cardArr);
+    return {
+      sideA: newCard.sidea,
+      sideB: newCard.sideb,
+      card_id: newCard.card_id,
+      cardset_id,
+    };
   }
 
   function handleCorrectGuess() {
+    console.log("current card_id:", card_id);
+
     // edge case for array of 1 or less cards
     if (cardArr.length <= 1) return;
 
@@ -89,6 +102,7 @@ export const App = () => {
       return card.card_id !== card_id;
     });
     setCardArr(newArr);
+    console.log("current cards:", newArr);
 
     // revert card to show preferred side
     // setTimeout to wait until card is flipped to get new card
@@ -98,16 +112,20 @@ export const App = () => {
   }
 
   function handleIncorrectGuess() {
+    console.log("current card_id:", card_id);
+
     // revert card to show preferred side
     // setTimeout to wait until card is flipped to get new card
     if (flipped !== flipAllCards) setTimeout(getNewCard, 250);
     else getNewCard();
     setFlipped(flipAllCards);
+    console.log("current cards:", cardArr);
   }
 
   function onChangeHandlerSideA(e) {
     setSideA(e.target.value);
   }
+
   function onChangeHandlerSideB(e) {
     setSideB(e.target.value);
   }
@@ -122,7 +140,6 @@ export const App = () => {
 
   function toggleFlip() {
     setFlipped(!flipped);
-    console.log("toggleFlip: ", !flipped);
   }
 
   function toggleFlipAllCards() {
@@ -164,13 +181,19 @@ export const App = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newCard),
-      }).catch((err) => {
-        console.log("err: ", err);
-      });
+      })
+        .then((response) => response.json())
+        .then((newCard) => {
+          setCardArr([...cardArr, newCard]);
+        })
+        .catch((err) => {
+          console.log("err: ", err);
+        });
 
       // confirm creation
       alert(alertMsg);
     }
+    getNewCard();
   }
 
   function onClickHandlerDeleteCard() {
@@ -185,7 +208,12 @@ export const App = () => {
       });
 
       alert("Card deleted successfully");
+      const newArr = cardArr.filter((card) => card.card_id !== card_id);
+      setCardArr(newArr);
+      console.log("current cards:", newArr);
+
       clearCardData();
+      getNewCard();
     }
   }
 
@@ -215,6 +243,7 @@ export const App = () => {
               handleIncorrectGuess={handleIncorrectGuess}
               handleCorrectGuess={handleCorrectGuess}
               toggleFlipAllCards={toggleFlipAllCards}
+              getNewCard={getNewCard}
             />
           }
         />

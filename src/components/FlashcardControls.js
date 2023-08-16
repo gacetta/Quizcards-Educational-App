@@ -8,7 +8,7 @@ export const FlashcardControls = (props) => {
         className={props.flipAllCards ? "flip-all a-team" : "flip-all b-sides"}
         onClick={props.toggleFlipAllCards}
       >
-        {!props.flipAllCards ? "B-Sides" : "The A-Team"}
+        {!props.flipAllCards ? "show the B-Sides" : "show the A-Team"}
       </button>
       <div className="buttonContainer">
         <button onClick={props.handleIncorrectGuess} className="incorrectGuess">

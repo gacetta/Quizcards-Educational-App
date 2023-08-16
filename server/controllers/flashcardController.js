@@ -81,8 +81,6 @@ flashcardController.updateCard = (req, res, next) => {
       });
     }
 
-    console.log("db query result: ", result.rows);
-    res.locals.cards = result.rows;
     return next();
   });
 };
@@ -97,6 +95,7 @@ flashcardController.createCard = (req, res, next) => {
   const querySelector = `
   INSERT INTO cards (sidea, sideb, cardset_id)
   VALUES ('${sidea}', '${sideb}', ${cardset_id})
+  RETURNING card_id, sidea, sideb, cardset_id;
   `;
 
   // make a request to DB
@@ -110,6 +109,8 @@ flashcardController.createCard = (req, res, next) => {
       });
     }
 
+    console.log("new card_id: ", result.rows[0]);
+    res.locals.newCard = result.rows[0];
     return next();
   });
 };

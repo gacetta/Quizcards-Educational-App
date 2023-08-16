@@ -14,9 +14,9 @@ router.put("/:card_id", flashcardController.updateCard, (req, res) => {
 
 router.post("/", flashcardController.createCard, (req, res) => {
   console.log(
-    `cardsRouter.js completing POST request to '/cards/'. req.body: ${req.body}`
+    `cardsRouter.js completing POST request to '/cards/'. newcard: ${res.locals.newCard}`
   );
-  res.sendStatus(200);
+  res.status(200).json(res.locals.newCard);
 });
 
 router.delete("/:card_id", flashcardController.deleteCard, (req, res) => {

@@ -12,8 +12,6 @@ import { TextAreaInput, CardlistCard } from "../components";
 */
 
 export const EditCardsetPage = (props) => {
-  console.log(props.cardArr);
-
   return (
     <div className="editCardset main-container flex-container-col">
       <h1 className="heavyText">Edit Cardset</h1>

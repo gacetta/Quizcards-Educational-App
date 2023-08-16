@@ -10,7 +10,10 @@ export const CardlistCard = (props) => {
         <Link className="cardlistLink edit-link" to={`/cards/${props.card_id}`}>
           Edit
         </Link>
-        <Link className="cardlistLink edit-link" to={`/cards/${props.card_id}`}>
+        <Link
+          className="cardlistLink delete-link"
+          to={`/cards/${props.card_id}`}
+        >
           Delete
         </Link>
       </div>

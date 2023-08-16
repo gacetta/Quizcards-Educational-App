@@ -9,4 +9,19 @@
 
 .cardsets-container {
   width: 100%;
+  margin: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-item: center;
+  align-items: center;
+}
+
+.login-container {
+  padding: 1rem;
+  margin: 2rem;
+
+  & h3 {
+    margin-bottom: 1rem;
+    text-align: center;
+  }
 }

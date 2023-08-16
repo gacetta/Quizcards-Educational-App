@@ -18,7 +18,8 @@ button {
 .flip-all {
   width: 100%;
   height: 100%;
-  padding: 2px 0;
+  padding: 1rem .5rem;
+  border-radius: 2px;
 }
 
 .a-team {
@@ -39,12 +40,18 @@ button {
   text-align: center;
   line-height: .9;
   font-family: 'Nanum Pen Script', cursive;
+  margin-right: 2rem;
 }
 
 .correctGuess {
   color: forestgreen;
   font-size: 4rem;
   font-family: 'Nanum Pen Script', cursive;
+}
+
+.incorrectGuess,
+.correctGuess {
+  margin-bottom: 1rem;
 }
 
 .loginButton {
