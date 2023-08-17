@@ -32,13 +32,16 @@ export const EditCardsetPage = (props) => {
               Side B
             </p>
           </li>
-          {props.cardArr.map((card) => {
+          {props.entireArr.map((card) => {
             return (
               <CardlistCard
                 key={card.card_id}
                 sideA={card.sidea}
                 sideB={card.sideb}
                 card_id={card.card_id}
+                loadSpecificCard={props.loadSpecificCard}
+                cardset_id={props.cardset_id}
+                onClickHandlerDeleteCard={props.onClickHandlerDeleteCard}
               />
             );
           })}

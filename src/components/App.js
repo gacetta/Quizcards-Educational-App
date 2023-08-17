@@ -18,6 +18,7 @@ export const App = () => {
   const [cardsetName, setCardsetName] = useState("national capitals");
 
   // array of cards
+  const [entireArr, setEntireArr] = useState([]);
   const [cardArr, setCardArr] = useState([]);
 
   // flip cards state
@@ -39,6 +40,7 @@ export const App = () => {
       .then((data) => {
         // load cards into state
         setCardArr(data);
+        setEntireArr(data);
         console.log("current cards:", data);
 
         // initialize card state with random card
@@ -89,6 +91,13 @@ export const App = () => {
       card_id: newCard.card_id,
       cardset_id,
     };
+  }
+
+  function loadSpecificCard(card_id) {
+    const specificCard = entireArr.find((card) => card.card_id === card_id);
+    setSideA(specificCard.sidea);
+    setSideB(specificCard.sideb);
+    setCard_id(specificCard.card_id);
   }
 
   function handleCorrectGuess() {
@@ -208,9 +217,12 @@ export const App = () => {
       });
 
       alert("Card deleted successfully");
-      const newArr = cardArr.filter((card) => card.card_id !== card_id);
-      setCardArr(newArr);
-      console.log("current cards:", newArr);
+      const newCardArr = cardArr.filter((card) => card.card_id !== card_id);
+      const newEntireArr = entireArr.filter((card) => card.card_id !== card_id);
+      setCardArr(newCardArr);
+      setEntireArr(newEntireArr);
+      console.log("current cards:", newCardArr);
+      console.log("all cards:", newEntireArr);
 
       clearCardData();
       getNewCard();
@@ -285,11 +297,13 @@ export const App = () => {
             <EditCardsetPage
               cardsetName={cardsetName}
               cardset_id={cardset_id}
-              cardArr={cardArr}
+              entireArr={entireArr}
               sideA={sideA}
               sideB={sideB}
               card_id={card_id}
               onChangeHandlerCardsetName={onChangeHandlerCardsetName}
+              loadSpecificCard={loadSpecificCard}
+              onClickHandlerDeleteCard={onClickHandlerDeleteCard}
             />
           }
         />

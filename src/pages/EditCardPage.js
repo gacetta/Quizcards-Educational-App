@@ -1,9 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-
 import { TextAreaInput } from "../components";
 
 export const EditCardPage = (props) => {
+  console.log("props:", props);
   const navigate = useNavigate();
 
   const handleSave = () => {
