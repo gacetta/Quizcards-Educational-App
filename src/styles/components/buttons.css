@@ -34,6 +34,14 @@ button {
   border: 2px solid #fca311;
 }
 
+.create-new {
+  margin: 0;
+  margin-right: 2rem;
+  width: 100%;
+  padding: 1rem .5rem;
+  border-radius: 2px;
+}
+
 .incorrectGuess {
   color: red;
   font-size: 6rem;

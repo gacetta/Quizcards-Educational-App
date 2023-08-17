@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { TextAreaInput, CardlistCard } from "../components";
 
 /** 
@@ -12,6 +12,13 @@ import { TextAreaInput, CardlistCard } from "../components";
 */
 
 export const EditCardsetPage = (props) => {
+  const navigate = useNavigate();
+
+  const onClickHandler = () => {
+    props.clearCardData();
+    navigate("/cards/");
+  };
+
   return (
     <div className="editCardset main-container flex-container-col">
       <h1 className="heavyText">Edit Cardset</h1>
@@ -25,12 +32,9 @@ export const EditCardsetPage = (props) => {
         <h3 className="heavyText">Card list:</h3>
         <ul>
           <li className="flex-container-row">
-            <p className="cardlistSideA cardlistSide-container cardlistHeader">
-              Side A
-            </p>
-            <p className="cardlistSideB cardlistSide-container cardlistHeader">
-              Side B
-            </p>
+            <p className="sideA-header">Side A</p>
+            <p className="sideB-header">Side B</p>
+            <div className="hidden">Delete</div>
           </li>
           {props.entireArr.map((card) => {
             return (
@@ -45,6 +49,12 @@ export const EditCardsetPage = (props) => {
               />
             );
           })}
+          <li className="flex-container-row">
+            <button className="create-new" onClick={onClickHandler}>
+              Create New Card
+            </button>
+            <div className="hidden">Delete</div>
+          </li>
         </ul>
       </section>
     </div>

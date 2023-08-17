@@ -6,8 +6,8 @@ export const CardlistCard = (props) => {
     props.loadSpecificCard(props.card_id);
   };
 
-  const onClickDelete = () => {
-    props.loadSpecificCard(props.card_id);
+  const onClickDelete = async () => {
+    await props.loadSpecificCard(props.card_id);
     props.onClickHandlerDeleteCard();
   };
 

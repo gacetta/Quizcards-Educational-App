@@ -84,7 +84,6 @@ export const App = () => {
     setSideB(newCard.sideb);
     setCard_id(newCard.card_id);
 
-    console.log("getNewCard current cards:", cardArr);
     return {
       sideA: newCard.sidea,
       sideB: newCard.sideb,
@@ -101,7 +100,7 @@ export const App = () => {
   }
 
   function handleCorrectGuess() {
-    console.log("current card_id:", card_id);
+    console.log("correct guess for card_id:", card_id);
 
     // edge case for array of 1 or less cards
     if (cardArr.length <= 1) return;
@@ -121,7 +120,7 @@ export const App = () => {
   }
 
   function handleIncorrectGuess() {
-    console.log("current card_id:", card_id);
+    console.log("incorrect guess for card_id:", card_id);
 
     // revert card to show preferred side
     // setTimeout to wait until card is flipped to get new card
@@ -173,9 +172,21 @@ export const App = () => {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newCard),
-      }).catch((err) => {
-        console.log("err: ", err);
-      });
+      })
+        .then(() => {
+          const filteredCardArr = cardArr.filter(
+            (card) => newCard.card_id !== card.card_id
+          );
+          setCardArr([...filteredCardArr, newCard]);
+
+          const filteredEntireArr = entireArr.filter(
+            (card) => newCard.card_id !== card.card_id
+          );
+          setEntireArr([...filteredEntireArr, newCard]);
+        })
+        .catch((err) => {
+          console.log("err: ", err);
+        });
 
       // confirm update
       alert(alertMsg);
@@ -192,8 +203,9 @@ export const App = () => {
         body: JSON.stringify(newCard),
       })
         .then((response) => response.json())
-        .then((newCard) => {
-          setCardArr([...cardArr, newCard]);
+        .then((newCardResponse) => {
+          setCardArr([...cardArr, newCardResponse]);
+          setEntireArr([...entireArr, newCardResponse]);
         })
         .catch((err) => {
           console.log("err: ", err);
@@ -304,6 +316,7 @@ export const App = () => {
               onChangeHandlerCardsetName={onChangeHandlerCardsetName}
               loadSpecificCard={loadSpecificCard}
               onClickHandlerDeleteCard={onClickHandlerDeleteCard}
+              clearCardData={clearCardData}
             />
           }
         />
