@@ -35,10 +35,13 @@ export const App = () => {
   // INITIALIZE CARDS //
   //------------------//
   useEffect(() => {
+    let responseClone;
     fetch(`/cardsets/${cardset_id}`)
-      .then((res) => res.json())
+      .then((res) => {
+        responseClone = res.clone();
+        return res.json();
+      })
       .then((data) => {
-        console.log(".then useEffect");
         // load cards into state
         setCardArr(data);
         setEntireArr(data);
@@ -55,7 +58,10 @@ export const App = () => {
         setCard_id(cardID);
       })
       .catch((err) => {
-        console.log("fetch error: ", err);
+        console.log("fetch error: ", err, responseClone);
+        responseClone.text().then((body) => {
+          console.log("response (not valid JSON):", body);
+        });
       });
   }, []);
 
