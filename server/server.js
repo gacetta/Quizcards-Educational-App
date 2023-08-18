@@ -22,35 +22,20 @@ app.use("/build", express.static(path.resolve(__dirname, "../build")));
 
 // define route handlers
 app.use("/user", (req, res, next) => {
-  console.log(
-    `server.js - Request to '/user' in server.js routed to userRouter.js`
-  );
   userRouter(req, res, next);
 });
 
 app.use("/cards", (req, res, next) => {
-  console.log(
-    `server.js - Request to '/cards' in server.js routed to cardsRouter.js`
-  );
   cardsRouter(req, res, next);
 });
 
 app.use("/cardsets", (req, res, next) => {
-  console.log(
-    `server.js - Request to '/cards' in server.js routed to cardsetsRouter.js`
-  );
   cardsetsRouter(req, res, next);
 });
 
 app.get("/", (req, res) => {
-  console.log(`Get request for '/'.  sending index.html`);
   res.status(200).sendFile(path.resolve(__dirname, "../index.html"));
 });
-
-// app.post("/", (req, res) => {
-//   console.log(`incoming POST request: ${req.body}`);
-//   res.status(200).json({ request: "received" });
-// });
 
 // define catch-all route handler for requests to an unknown route
 app.use((req, res) => res.status(404).send("No page found at that location"));

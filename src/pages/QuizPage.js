@@ -4,7 +4,6 @@ import { Flashcard, FlashcardControls } from "../components";
 export const QuizPage = (props) => {
   // fringe case of navigating to /quiz while making new card
   if (!props.card_id) {
-    console.log("no card_id");
     const { sideA, sideB, card_id, cardset_id } = props.getNewCard();
   }
 

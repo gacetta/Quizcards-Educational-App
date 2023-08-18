@@ -5,7 +5,6 @@ const flashcardController = require("../controllers/flashcardController");
 const router = express.Router();
 
 router.get("/", flashcardController.getUsers, (req, res) => {
-  console.log(res.locals);
   return res.status(200).json(res.locals.users);
 });
 

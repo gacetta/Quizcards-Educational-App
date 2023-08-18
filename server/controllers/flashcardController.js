@@ -3,8 +3,6 @@ const db = require("../models/flashcardModel");
 const flashcardController = {};
 
 flashcardController.getUsers = (req, res, next) => {
-  console.log("fcc.getUsers making DB query to get all users");
-
   // query: select all data from users table
   const querySelector = `
   SELECT * 
@@ -22,15 +20,13 @@ flashcardController.getUsers = (req, res, next) => {
       });
     }
 
-    console.log("db query result: ", result.rows);
+    // console.log("db query result: ", result.rows);
     res.locals.users = result.rows;
     return next();
   });
 };
 
 flashcardController.getCards = (req, res, next) => {
-  console.log("fcc.getCards making DB query to get all users");
-  console.log("cardset_id from req.params: ", req.params.cardset_id);
   // query: select all cards from cardset_id
   const querySelector = `
   SELECT * 
@@ -49,17 +45,13 @@ flashcardController.getCards = (req, res, next) => {
       });
     }
 
-    console.log("db query result: ", result.rows);
+    // console.log("db query result: ", result.rows);
     res.locals.cards = result.rows;
     return next();
   });
 };
 
 flashcardController.updateCard = (req, res, next) => {
-  console.log(
-    `fcc.updateCard making DB query to update card_id ${req.params.card_id}`
-  );
-
   // grab data from req.body to update card in query
   const { sidea, sideb, cardset_id } = req.body;
 
@@ -86,8 +78,6 @@ flashcardController.updateCard = (req, res, next) => {
 };
 
 flashcardController.createCard = (req, res, next) => {
-  console.log(`fcc.createCard making DB query to create new card: ${req.body}`);
-
   // grab data from req.body to create card in query
   const { sidea, sideb, cardset_id } = req.body;
 
@@ -109,17 +99,12 @@ flashcardController.createCard = (req, res, next) => {
       });
     }
 
-    console.log("new card_id: ", result.rows[0]);
     res.locals.newCard = result.rows[0];
     return next();
   });
 };
 
 flashcardController.deleteCard = (req, res, next) => {
-  console.log(
-    `fcc.deleteCard making DB query to delete card_id: ${req.params.card_id}`
-  );
-
   // query: delete card matching card_id
   const querySelector = `
   DELETE FROM cards

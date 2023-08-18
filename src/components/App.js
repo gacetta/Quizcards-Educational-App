@@ -35,13 +35,12 @@ export const App = () => {
   // INITIALIZE CARDS //
   //------------------//
   useEffect(() => {
-    fetch(`http://localhost:3000/cardsets/${cardset_id}`)
+    fetch(`/cardsets/${cardset_id}`)
       .then((res) => res.json())
       .then((data) => {
         // load cards into state
         setCardArr(data);
         setEntireArr(data);
-        console.log("current cards:", data);
 
         // initialize card state with random card
         const {
@@ -49,8 +48,6 @@ export const App = () => {
           sideb,
           card_id: cardID,
         } = data[Math.floor(Math.random() * data.length)];
-
-        console.log("card_id: ", cardID);
 
         setSideA(sidea);
         setSideB(sideb);
@@ -65,8 +62,6 @@ export const App = () => {
   // HANDLERS         //
   //------------------//
   function getNewCard() {
-    console.log("getNewCard");
-
     // edge case for 1 or less cards
     if ((cardArr.length <= 1) & card_id) return;
 
@@ -100,8 +95,6 @@ export const App = () => {
   }
 
   function handleCorrectGuess() {
-    console.log("correct guess for card_id:", card_id);
-
     // edge case for array of 1 or less cards
     if (cardArr.length <= 1) return;
 
@@ -110,7 +103,6 @@ export const App = () => {
       return card.card_id !== card_id;
     });
     setCardArr(newArr);
-    console.log("current cards:", newArr);
 
     // revert card to show preferred side
     // setTimeout to wait until card is flipped to get new card
@@ -120,14 +112,11 @@ export const App = () => {
   }
 
   function handleIncorrectGuess() {
-    console.log("incorrect guess for card_id:", card_id);
-
     // revert card to show preferred side
     // setTimeout to wait until card is flipped to get new card
     if (flipped !== flipAllCards) setTimeout(getNewCard, 250);
     else getNewCard();
     setFlipped(flipAllCards);
-    console.log("current cards:", cardArr);
   }
 
   function onChangeHandlerSideA(e) {
@@ -154,17 +143,13 @@ export const App = () => {
     setFlipAllCards(!flipAllCards);
     toggleFlip();
     setFlipped(!flipAllCards);
-    console.log("toggleFlipAllCards: ", !flipAllCards);
   }
 
   function saveCard() {
-    console.log("saveCard");
     // create card object with sideA, sideB and cardID
     const updating = card_id ? true : false;
     const newCard = { sidea: sideA, sideb: sideB, cardset_id };
     const alertMsg = `Card ${updating ? "updated" : "created"} successfully`;
-
-    console.log("newCard:", newCard);
 
     if (updating) {
       newCard.card_id = card_id;
@@ -178,10 +163,8 @@ export const App = () => {
   }
 
   function updateCard(newCard) {
-    console.log("updating card: ", card_id, "to:", newCard);
-
     // DB Update record with PUT request to 'cards/card_id'
-    fetch(`http://localhost:3000/cards/${card_id}`, {
+    fetch(`/cards/${card_id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newCard),
@@ -205,10 +188,8 @@ export const App = () => {
   }
 
   function createCard(newCard) {
-    console.log("creating card: ", newCard);
-
     // DB CREATE record with POST request to '/cards'
-    fetch(`http://localhost:3000/cards/`, {
+    fetch(`/cards/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newCard),
@@ -224,11 +205,10 @@ export const App = () => {
   }
 
   function deleteCard(card_id) {
-    console.log("deleting card_id: ", card_id);
     if (!card_id) return;
 
     // DB Update record with PUT request to 'cards/card_id'
-    fetch(`http://localhost:3000/cards/${card_id}`, {
+    fetch(`/cards/${card_id}`, {
       method: "DELETE",
     }).catch((err) => {
       console.log("err: ", err);
@@ -240,15 +220,12 @@ export const App = () => {
     const newEntireArr = entireArr.filter((card) => card.card_id !== card_id);
     setCardArr(newCardArr);
     setEntireArr(newEntireArr);
-    console.log("current cards:", newCardArr);
-    console.log("all cards:", newEntireArr);
 
     clearCardData();
     getNewCard();
   }
 
   function clearCardData() {
-    console.log("clearing card data");
     setSideA("");
     setSideB("");
     setCard_id(null);

@@ -11,7 +11,6 @@ export const CardlistCard = (props) => {
     props.deleteCard(props.card_id);
   };
 
-  console.log("cardlistCard props:", props);
   return (
     <li className="cardlist-card flex-container-row">
       <div className="cardlistSideA cardlistSide-container">{props.sideA}</div>{" "}
