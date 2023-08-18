@@ -4,12 +4,6 @@ import { Link } from "react-router-dom";
 export const FlashcardControls = (props) => {
   return (
     <section className="flex-container-col controller-container">
-      <button
-        className={props.flipAllCards ? "flip-all a-team" : "flip-all b-sides"}
-        onClick={props.toggleFlipAllCards}
-      >
-        {!props.flipAllCards ? "show the B-Sides" : "show the A-Team"}
-      </button>
       <div className="buttonContainer">
         <button onClick={props.handleIncorrectGuess} className="incorrectGuess">
           X
@@ -18,6 +12,12 @@ export const FlashcardControls = (props) => {
           ✓
         </button>
       </div>
+      <button
+        className={props.flipAllCards ? "flip-all a-team" : "flip-all b-sides"}
+        onClick={props.toggleFlipAllCards}
+      >
+        {!props.flipAllCards ? "show the B-Sides" : "show the A-Team"}
+      </button>
       <Link className="edit-link" to={`/cards/${props.card_id}`}>
         Edit Card
       </Link>

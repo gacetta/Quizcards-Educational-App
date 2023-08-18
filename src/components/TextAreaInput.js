@@ -1,7 +1,6 @@
 import React from "react";
 
 export const TextAreaInput = (props) => {
-  console.log(props);
   const isSideA = props.labelID === "sideA";
   const isEmpty = props.value === "";
 
