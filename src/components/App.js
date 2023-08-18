@@ -38,6 +38,7 @@ export const App = () => {
     fetch(`/cardsets/${cardset_id}`)
       .then((res) => res.json())
       .then((data) => {
+        console.log(".then useEffect");
         // load cards into state
         setCardArr(data);
         setEntireArr(data);

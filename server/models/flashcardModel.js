@@ -2,6 +2,7 @@ const { Pool } = require("pg");
 const dotenv = require("dotenv");
 
 dotenv.config();
+console.log("flashcardModel.js - process.env.PG_URI:", process.env.PG_URI);
 
 // create new pool using connection string above
 const pool = new Pool({
