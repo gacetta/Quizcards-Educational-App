@@ -65,10 +65,10 @@ export const App = () => {
   // HANDLERS         //
   //------------------//
   function getNewCard() {
+    console.log("getNewCard");
+
     // edge case for 1 or less cards
     if ((cardArr.length <= 1) & card_id) return;
-
-    console.log("getNewCard");
 
     // get new random card from cardArr (new card)
     let newCard;
@@ -157,88 +157,94 @@ export const App = () => {
     console.log("toggleFlipAllCards: ", !flipAllCards);
   }
 
-  function onClickHandlerSaveCard() {
+  function saveCard() {
+    console.log("saveCard");
     // create card object with sideA, sideB and cardID
-    const newCard = { sidea: sideA, sideb: sideB, cardset_id };
     const updating = card_id ? true : false;
+    const newCard = { sidea: sideA, sideb: sideB, cardset_id };
     const alertMsg = `Card ${updating ? "updated" : "created"} successfully`;
 
-    // UPDATE CARD (card_id exists)
+    console.log("newCard:", newCard);
+
     if (updating) {
-      console.log("updating card: ", newCard);
-
-      // DB Update record with PUT request to 'cards/card_id'
-      fetch(`http://localhost:3000/cards/${card_id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newCard),
-      })
-        .then(() => {
-          const filteredCardArr = cardArr.filter(
-            (card) => newCard.card_id !== card.card_id
-          );
-          setCardArr([...filteredCardArr, newCard]);
-
-          const filteredEntireArr = entireArr.filter(
-            (card) => newCard.card_id !== card.card_id
-          );
-          setEntireArr([...filteredEntireArr, newCard]);
-        })
-        .catch((err) => {
-          console.log("err: ", err);
-        });
-
-      // confirm update
-      alert(alertMsg);
+      newCard.card_id = card_id;
+      updateCard(newCard);
+    } else {
+      createCard(newCard);
     }
 
-    // CREATE NEW CARD (card_id is null)
-    else {
-      console.log("creating card: ", newCard);
-
-      // DB CREATE record with POST request to '/cards'
-      fetch(`http://localhost:3000/cards/`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newCard),
-      })
-        .then((response) => response.json())
-        .then((newCardResponse) => {
-          setCardArr([...cardArr, newCardResponse]);
-          setEntireArr([...entireArr, newCardResponse]);
-        })
-        .catch((err) => {
-          console.log("err: ", err);
-        });
-
-      // confirm creation
-      alert(alertMsg);
-    }
+    alert(alertMsg);
     getNewCard();
   }
 
-  function onClickHandlerDeleteCard() {
-    if (card_id) {
-      console.log("deleting card_id: ", card_id);
+  function updateCard(newCard) {
+    console.log("updating card: ", card_id, "to:", newCard);
 
-      // DB Update record with PUT request to 'cards/card_id'
-      fetch(`http://localhost:3000/cards/${card_id}`, {
-        method: "DELETE",
-      }).catch((err) => {
+    // DB Update record with PUT request to 'cards/card_id'
+    fetch(`http://localhost:3000/cards/${card_id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newCard),
+    })
+      .then(() => {
+        // update currentCardArr - for quiz
+        const filteredCardArr = cardArr.filter(
+          (card) => newCard.card_id !== card.card_id
+        );
+        setCardArr([...filteredCardArr, newCard]);
+
+        // update entireArr - for edit cardset
+        const filteredEntireArr = entireArr.filter(
+          (card) => newCard.card_id !== card.card_id
+        );
+        setEntireArr([...filteredEntireArr, newCard]);
+      })
+      .catch((err) => {
         console.log("err: ", err);
       });
+  }
 
-      alert("Card deleted successfully");
-      const newCardArr = cardArr.filter((card) => card.card_id !== card_id);
-      const newEntireArr = entireArr.filter((card) => card.card_id !== card_id);
-      setCardArr(newCardArr);
-      setEntireArr(newEntireArr);
-      console.log("current cards:", newCardArr);
-      console.log("all cards:", newEntireArr);
+  function createCard(newCard) {
+    console.log("creating card: ", newCard);
 
-      clearCardData();
-      getNewCard();
-    }
+    // DB CREATE record with POST request to '/cards'
+    fetch(`http://localhost:3000/cards/`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newCard),
+    })
+      .then((response) => response.json())
+      .then((newCardResponse) => {
+        setCardArr([...cardArr, newCardResponse]);
+        setEntireArr([...entireArr, newCardResponse]);
+      })
+      .catch((err) => {
+        console.log("err: ", err);
+      });
+  }
+
+  function deleteCard(card_id) {
+    console.log("deleting card_id: ", card_id);
+    if (!card_id) return;
+
+    // DB Update record with PUT request to 'cards/card_id'
+    fetch(`http://localhost:3000/cards/${card_id}`, {
+      method: "DELETE",
+    }).catch((err) => {
+      console.log("err: ", err);
+    });
+
+    alert("Card deleted successfully");
+
+    const newCardArr = cardArr.filter((card) => card.card_id !== card_id);
+    const newEntireArr = entireArr.filter((card) => card.card_id !== card_id);
+    setCardArr(newCardArr);
+    setEntireArr(newEntireArr);
+    console.log("current cards:", newCardArr);
+    console.log("all cards:", newEntireArr);
+
+    clearCardData();
+    getNewCard();
   }
 
   function clearCardData() {
@@ -281,8 +287,8 @@ export const App = () => {
               creatingNewCard={creatingNewCard}
               onChangeHandlerSideA={onChangeHandlerSideA}
               onChangeHandlerSideB={onChangeHandlerSideB}
-              onClickHandlerSaveCard={onClickHandlerSaveCard}
-              onClickHandlerDeleteCard={onClickHandlerDeleteCard}
+              saveCard={saveCard}
+              deleteCard={deleteCard}
               clearCardData={clearCardData}
               toggleCreatingNewCard={toggleCreatingNewCard}
             />
@@ -297,8 +303,8 @@ export const App = () => {
               card_id={card_id}
               onChangeHandlerSideA={onChangeHandlerSideA}
               onChangeHandlerSideB={onChangeHandlerSideB}
-              onClickHandlerSaveCard={onClickHandlerSaveCard}
-              onClickHandlerDeleteCard={onClickHandlerDeleteCard}
+              saveCard={saveCard}
+              deleteCard={deleteCard}
               clearCardData={clearCardData}
             />
           }
@@ -315,7 +321,7 @@ export const App = () => {
               card_id={card_id}
               onChangeHandlerCardsetName={onChangeHandlerCardsetName}
               loadSpecificCard={loadSpecificCard}
-              onClickHandlerDeleteCard={onClickHandlerDeleteCard}
+              deleteCard={deleteCard}
               clearCardData={clearCardData}
             />
           }

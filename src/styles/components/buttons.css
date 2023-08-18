@@ -1,7 +1,11 @@
 button {
-  width: 50px;
-  height: 50px;
+  width: 5rem;
+  height: 5rem;
   margin: .5rem;
+}
+
+.create-new-card {
+  width: 100%;
 }
 
 .buttonContainer {
@@ -69,4 +73,10 @@ button {
 
 .cardsetButton {
   width: 15rem;
+}
+
+.create-new-card {
+  margin: 0;
+  margin-top: 1rem;
+  height: 2.5rem;
 }

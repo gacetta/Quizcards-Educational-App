@@ -1,0 +1,15 @@
+.editCardControls-container {
+}
+
+.editCardControls-subControls {
+  justify-content: space-between;
+
+  & .saveButton,
+  .deleteButton {
+    margin: 0;
+  }
+
+  & .saveButton {
+    margin-right: 1rem;
+  }
+}

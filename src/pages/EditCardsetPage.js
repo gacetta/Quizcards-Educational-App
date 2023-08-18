@@ -45,7 +45,7 @@ export const EditCardsetPage = (props) => {
                 card_id={card.card_id}
                 loadSpecificCard={props.loadSpecificCard}
                 cardset_id={props.cardset_id}
-                onClickHandlerDeleteCard={props.onClickHandlerDeleteCard}
+                deleteCard={props.deleteCard}
               />
             );
           })}

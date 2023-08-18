@@ -6,9 +6,9 @@ export const CardlistCard = (props) => {
     props.loadSpecificCard(props.card_id);
   };
 
-  const onClickDelete = async () => {
-    await props.loadSpecificCard(props.card_id);
-    props.onClickHandlerDeleteCard();
+  const onClickHandlerDeleteCard = () => {
+    props.loadSpecificCard(props.card_id);
+    props.deleteCard(props.card_id);
   };
 
   console.log("cardlistCard props:", props);
@@ -26,7 +26,7 @@ export const CardlistCard = (props) => {
         </Link>
         <Link
           className="cardlistLink delete-link"
-          onClick={onClickDelete}
+          onClick={onClickHandlerDeleteCard}
           to={`/cardsets/${props.cardset_id}`}
         >
           Delete
