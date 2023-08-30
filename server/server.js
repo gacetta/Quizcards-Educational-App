@@ -3,7 +3,6 @@ const express = require("express");
 const userRouter = require("./routes/userRouter");
 const cardsRouter = require("./routes/cardsRouter");
 const cardsetsRouter = require("./routes/cardsetsRouter");
-const flashcardController = require("./controllers/flashcardController");
 const cors = require("cors");
 
 // setup app and port
