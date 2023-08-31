@@ -23,10 +23,10 @@ Select cardset to study. At the moment, only National Capitals is available.
 
 The study/quiz is self-scoring. Click on the card to show the flip side
 
-`x` - incorrect guess, keep the card in the pile to appear again
-`✓` - correct guess, remove the card from the pile not to appear again
-`show the B-Sides` (or `show the A-Team`) - toggle which side of the card to quiz from
-`edit card` - takes you to card edit page
+- `x` - incorrect guess, keep the card in the pile to appear again
+- `✓` - correct guess, remove the card from the pile not to appear again
+- `show the B-Sides` (or `show the A-Team`) - toggle which side of the card to quiz from
+- `edit card` - takes you to card edit page
 
 ### EDIT CARDSET
 
@@ -39,6 +39,7 @@ View the cardset name and a list of all cards.
 ---
 
 Demo:
+https://github.com/gacetta/Quizcards-Educational-App/assets/78240758/9cce336e-c371-48ed-9deb-dd60bd9c615d
 
 ---
 
