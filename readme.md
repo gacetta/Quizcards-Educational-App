@@ -1,6 +1,40 @@
 ## FLASHCARDS
 
-An exploration of web development technologies and concepts through an educational flashcard application.
+An educational flashcard application to explore web development technologies and concepts.
+
+---
+
+To run in a local development environment, run:
+
+```
+npm install
+npm run dev
+```
+
+---
+
+To use application:
+
+### HOME
+
+Select cardset to study. At the moment, only National Capitals is available.
+
+### QUIZ
+
+The study/quiz is self-scoring. Click on the card to show the flip side
+
+`x` - incorrect guess, keep the card in the pile to appear again
+`✓` - correct guess, remove the card from the pile not to appear again
+`show the B-Sides` (or `show the A-Team`) - toggle which side of the card to quiz from
+`edit card` - takes you to card edit page
+
+### EDIT CARDSET
+
+View the cardset name and a list of all cards.
+
+- Cardset name can be changed by selecting and replacing the text with desired updated name. Name will automatically be updated and saved.
+- Each individual card can be deleted or edited
+- Create a new card by clicking the button
 
 ---
 

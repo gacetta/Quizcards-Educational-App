@@ -85,7 +85,6 @@ export const App = () => {
     setSideA(newCard.sidea);
     setSideB(newCard.sideb);
     setCard_id(newCard.card_id);
-    setFlipped(flipAllCards);
 
     return {
       sideA: newCard.sidea,
@@ -148,6 +147,7 @@ export const App = () => {
   }
 
   function toggleFlipAllCards() {
+    setTimeout(getNewCard, 250);
     setFlipAllCards(!flipAllCards);
     toggleFlip();
     setFlipped(!flipAllCards);
@@ -167,6 +167,7 @@ export const App = () => {
     }
 
     alert(alertMsg);
+    setFlipped(flipAllCards);
     getNewCard();
   }
 
@@ -189,6 +190,7 @@ export const App = () => {
           (card) => newCard.card_id !== card.card_id
         );
         setEntireArr([...filteredEntireArr, newCard]);
+        setFlipped(flipAllCards);
       })
       .catch((err) => {
         console.log("err: ", err);
@@ -206,6 +208,7 @@ export const App = () => {
       .then((newCardResponse) => {
         setCardArr([...cardArr, newCardResponse]);
         setEntireArr([...entireArr, newCardResponse]);
+        setFlipped(flipAllCards);
       })
       .catch((err) => {
         console.log("err: ", err);
@@ -230,6 +233,7 @@ export const App = () => {
     setEntireArr(newEntireArr);
 
     clearCardData();
+    setFlipped(flipAllCards);
     getNewCard();
   }
 
