@@ -39,7 +39,9 @@ View the cardset name and a list of all cards.
 ---
 
 Demo:
-https://github.com/gacetta/Quizcards-Educational-App/assets/78240758/9cce336e-c371-48ed-9deb-dd60bd9c615d
+
+https://github.com/gacetta/Quizcards-Educational-App/assets/78240758/2cc99c0d-3dd7-47d3-8667-647a3a3b49df
+
 
 ---
 
