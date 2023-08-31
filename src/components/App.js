@@ -85,6 +85,7 @@ export const App = () => {
     setSideA(newCard.sidea);
     setSideB(newCard.sideb);
     setCard_id(newCard.card_id);
+    setFlipped(flipAllCards);
 
     return {
       sideA: newCard.sidea,
