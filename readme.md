@@ -1,6 +1,13 @@
-## FLASHCARDS
+## QUIZCARDS
 
 An educational flashcard application to explore web development technologies and concepts.
+
+---
+
+Demo:
+
+https://github.com/gacetta/Quizcards-Educational-App/assets/78240758/2cc99c0d-3dd7-47d3-8667-647a3a3b49df
+
 
 ---
 
@@ -35,13 +42,6 @@ View the cardset name and a list of all cards.
 - Cardset name can be changed by selecting and replacing the text with desired updated name. Name will automatically be updated and saved.
 - Each individual card can be deleted or edited
 - Create a new card by clicking the button
-
----
-
-Demo:
-
-https://github.com/gacetta/Quizcards-Educational-App/assets/78240758/2cc99c0d-3dd7-47d3-8667-647a3a3b49df
-
 
 ---
 
